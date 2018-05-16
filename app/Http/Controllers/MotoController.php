@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Moto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class MotoController extends Controller
 {
@@ -33,11 +34,11 @@ class MotoController extends Controller
 
         $motor->marka = $request->input('marka');
         $motor->model = $request->input('model');
-        $motor->pojemnosc = $request->input('pojemnosc'). 'cm';
-        $motor->moc = $request->input('moc') . 'KM';
-        $motor->waga = $request->input('waga') . 'kg';
+        $motor->pojemnosc = $request->input('pojemnosc'). ' cm3';
+        $motor->moc = $request->input('moc') . ' KM';
+        $motor->waga = $request->input('waga') . ' kg';
         $motor->zdj = 'motor/zdjecia/' . $filename;
-        $motor->dostep = 1;
+        $motor->dostep = '1';
         $motor->save();
 
         return redirect()->back();
@@ -52,14 +53,32 @@ class MotoController extends Controller
             ->with('moto', $moto);
     }
 
-    public function doMoto(Request $request, $id)
+     public function loanMoto($id)
     {
-        $moto = Moto::find($id);
+        $moto = Moto::findOrFail($id);
 
-        $moto->name = $request->input('name_edit');
-        $moto->email = $request->input('email_edit');
+        return view('moto-loan')
+            ->with('moto', $moto);
+    }
 
-        $moto->save();
+    public function doLoanMoto(Request $request)
+    {
+        $motor = Moto::findOrFail($request->input('id_moto'));
+        $user = Auth::user()->id; 
+
+        
+
+        $wypo = $motor->wypo()->create([
+            'id_moto' => $request->input('id_moto'),
+            'id_user' => $user,
+            'wypo_od' => $request->input('data_od'),
+            'wypo_do' => $request->input('data_do'),
+            'aktywne' => 1,
+        ]);
+
+        DB::table('moto')->where('id', $request->input('id_moto'))->update(['dostep' => '0']);
+
         return redirect()->back();
     }
+
 }

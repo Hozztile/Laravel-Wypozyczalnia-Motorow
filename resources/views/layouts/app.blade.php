@@ -60,8 +60,8 @@
                                         {{ __('Dodawanie motocykli') }}
                                     </a>
 
-                                    <a class="dropdown-item" href="{{ url('/moto/list') }}">
-                                        {{ __('Zarządzaj motocyklami') }}
+                                    <a class="dropdown-item" href="{{ url('/wypo/list') }}">
+                                        {{ __('Zarządzaj wypożyczeniami') }}
                                         </a>
 
                                     @endif

@@ -22,7 +22,7 @@
         					@else
         					<th>Motocykle</th>
         					<th>Opis</th>
-        					@if(Auth::user()->auth == '3' OR Auth::user()->auth == '2')
+        					@if(Auth::user()->auth == '3' OR Auth::user()->auth == '2' OR Auth::user()->auth == '1')
         					<th>Akcje</th>
         					@endif
         					@endguest
@@ -56,6 +56,10 @@
 								<a href="{{ url('/moto/edit/'. $motor->id) }}" class="btn btn-primary"> Edytuj</a><br><br>
 								<a href="{{ url('/moto/delete/'. $motor->id) }}" class="btn btn-primary"> Usuń</a>
 							</td>
+                            @endif
+                            @if(Auth::user()->auth == '1' AND $motor->dostep == '1')
+                                <a href="{{ url('/moto/loan/'. $motor->id) }}" class="btn btn-primary"> Wypożycz</a><br><br>
+                            </td>
                             @endif
                             @endguest
         				</tr>

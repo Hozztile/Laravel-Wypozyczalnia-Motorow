@@ -21,7 +21,7 @@ class CreateMotoTable extends Migration
             $table->string('moc');
             $table->string('waga');
             $table->string('zdj');
-            $table->boolean('dostep');
+            $table->string('dostep');
             $table->timestamps();
         });
     }

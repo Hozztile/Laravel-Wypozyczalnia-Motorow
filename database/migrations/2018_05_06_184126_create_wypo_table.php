@@ -19,6 +19,7 @@ class CreateWypoTable extends Migration
             $table->integer('id_user');
             $table->date('wypo_od');
             $table->date('wypo_do');
+            $table->integer('aktywne');
             $table->timestamps();
         });
     }
