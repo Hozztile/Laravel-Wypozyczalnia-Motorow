@@ -17,14 +17,9 @@ class UserTableSeeder extends Seeder
         	'name' => 'Admin',
         	'email' => 'admin@admin.pl',
         	'password' => Hash::make('admin') ,
+            'telefon' => '999999999',
             'auth' => '3',
         ]);
 
-        User::create([
-            'name' => 'Pracownik_1',
-            'email' => 'p1@wm.pl',
-            'password' => Hash::make('prac1') ,
-            'auth' => '2',
-        ]);
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Moto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -34,7 +35,10 @@ class UserController extends Controller
 
         $user->name = $request->input('name_edit');
         $user->email = $request->input('email_edit');
+        $user->telefon = $request->input('telefon_edit');
+        if(Auth::user()->auth == '3'){
         $user->auth = $request->input('auth_edit');
+        }
 
         $user->save();
         return redirect()->back();

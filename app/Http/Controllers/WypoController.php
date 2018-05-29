@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Wypo;
+use App\Moto;
 use Illuminate\Support\Facades\DB;
 
 class WypoController extends Controller
@@ -12,8 +13,10 @@ class WypoController extends Controller
     {
 
         $wypo = Wypo::all();
+        $moto = Moto::all();
 
         return view('wypo-list')
+            ->with('moto', $moto)
             ->with('wypo', $wypo);
     }
 
@@ -23,10 +26,21 @@ class WypoController extends Controller
 
         $id_motor = $wypo->moto['id'];
 
-        DB::table('wypo')->where('id', $id)->update(['aktywne' => '0']);
+        
         DB::table('moto')->where('id', $id_motor)->update(['dostep' => '1']);
 
-
+        $wypo->delete();
         return redirect()->back();
+    }
+
+    public function viewWypoListUser($id)
+    {
+
+        $wypo = Wypo::where('id_user', $id)->get();
+        $moto = Moto::all();
+
+        return view('wypo-list-user')
+            ->with('moto', $moto)
+            ->with('wypo', $wypo);
     }
 }

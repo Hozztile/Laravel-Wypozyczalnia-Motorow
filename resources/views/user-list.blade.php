@@ -31,7 +31,15 @@
                             @else
 
                             <td>{{$user->name}}
-                                
+                                <span style="float: right;">
+                                    @if ($user->auth == '3')
+                                    Administrator
+                                    @elseif ($user->auth == '2')
+                                    Pracownik
+                                    @elseif ($user->auth == '1')
+                                    Klient
+                                    @endif
+                                </span>
                             </td>
 							<td>
 

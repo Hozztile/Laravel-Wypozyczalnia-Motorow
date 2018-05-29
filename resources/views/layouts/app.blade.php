@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ 'Wypozyczalnia_Motocykli' }}</title>
+    <title>{{ 'Rezerwacja Motocykli' }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -25,7 +25,7 @@
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ 'Wypozyczalnia_Motocykli' }}
+                    {{ 'Rezerwacja Motocykli' }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -56,12 +56,20 @@
                                         </a>
                                     @endif
                                     @if(Auth::user()->auth == '3' OR Auth::user()->auth == '2')
-                                    <a class="dropdown-item" href="{{ url('/moto/dodaj') }}">
-                                        {{ __('Dodawanie motocykli') }}
-                                    </a>
-
                                     <a class="dropdown-item" href="{{ url('/wypo/list') }}">
-                                        {{ __('Zarządzaj wypożyczeniami') }}
+                                        {{ __('Zarządzaj rezerwacjami') }}
+                                        </a>
+
+                                    @endif
+                                    @if(Auth::user()->auth == '1')
+                                    <a class="dropdown-item" href="{{ url('/wypo/list/'. Auth::user()->id) }}">
+                                        {{ __('Moje rezerwacje') }}
+                                        </a>
+
+                                    @endif
+                                    @if(Auth::user()->auth == '1' OR Auth::user()->auth == '2')
+                                    <a class="dropdown-item" href="{{ url('/user/edit/'. Auth::user()->id ) }}">
+                                        {{ __('Edytuj dane konta') }}
                                         </a>
 
                                     @endif
@@ -82,7 +90,7 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="py-4" style="max-width: 1000px; margin: 0 auto;">
             @yield('content')
         </main>
     </div>

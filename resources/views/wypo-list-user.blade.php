@@ -4,7 +4,7 @@
 <br>
 	<div class="row">
 		<div class="col-md-12">
-			<h1>Lista rezerwacji</h1>
+			<h1>Moje rezerwacje</h1>
 		</div>
 	</div>
 
@@ -16,7 +16,6 @@
         			<thead>
 
         				<tr class="info">
-        					<th>Użytownik</th>
                             <th>Motocykl</th>
                             <th>Data początku rezerwacji</th>
                             <th>Data końca rezerwacji</th>
@@ -26,13 +25,11 @@
         			</thead>
 
         			<tbody>
-        				@foreach ($wypo as $wypoz)  
+        				@foreach ($wypo as $wypoz)
+                        @if ($wypoz->aktywne == '1')
         				<tr>
-							<td>
-                                {{ $wypoz->users['name'] }}
-                            </td>
                             <td>
-                                 {{ $wypoz->moto->marka['nazwa'] }} {{ $wypoz->moto['model'] }}  o numerze identyfikacyjnym: {{ $wypoz->id_moto }}
+                                {{ $wypoz->moto->marka['nazwa'] }} {{ $wypoz->moto['model'] }}  o numerze identyfikacyjnym: {{ $wypoz->id_moto }}
                             </td>
                             <td>
                                 {{ $wypoz->wypo_od }}
@@ -41,9 +38,10 @@
                                 {{ $wypoz->wypo_do }}
                             </td>
                             <td>
-                                <a href="{{ url('/wypo/res/'. $wypoz->id) }}" class="btn btn_primary"> Przyjmij</a>
+                                <a href="{{ url('/wypo/res/'. $wypoz->id) }}" class="btn btn_primary"> Anuluj</a>
                             </td>
         				</tr>
+                        @endif
         				@endforeach
         			</tbody>
         		</table>

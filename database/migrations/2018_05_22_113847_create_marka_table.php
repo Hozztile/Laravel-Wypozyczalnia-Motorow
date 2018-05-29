@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMotoTable extends Migration
+class CreateMarkaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,9 @@ class CreateMotoTable extends Migration
      */
     public function up()
     {
-        Schema::create('moto', function (Blueprint $table) {
+        Schema::create('marka', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_marka');
-            $table->string('model');
-            $table->string('pojemnosc');
-            $table->string('moc');
-            $table->string('waga');
-            $table->string('zdj');
-            $table->string('dostep');
+            $table->string('nazwa');
             $table->timestamps();
         });
     }
@@ -33,6 +27,6 @@ class CreateMotoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('moto');
+        Schema::dropIfExists('marka');
     }
 }
