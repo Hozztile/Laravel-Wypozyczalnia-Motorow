@@ -22,6 +22,9 @@ class CreateMotoTable extends Migration
             $table->string('waga');
             $table->string('zdj');
             $table->string('dostep');
+            $table->integer('cena');
+            $table->integer('przebieg');
+            $table->date('data_kons');
             $table->timestamps();
         });
     }

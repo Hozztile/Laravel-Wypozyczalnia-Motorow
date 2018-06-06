@@ -16,6 +16,8 @@ Auth::routes();
 
 
 Route::get('/', 'MotoController@viewMotoList');
+Route::get('/log-or-reg', 'MotoController@logOrReg');
+Route::post('/check', 'MotoController@check');
 
 Route::get('/moto/dodaj', 'MotoController@dodajMoto');
 Route::post('/moto/do_dodaj', 'MotoController@do_dodajMoto');
@@ -29,6 +31,7 @@ Route::get('/moto/loan/{id}', 'MotoController@loanMoto');
 Route::post('/moto/do-loan', 'MotoController@doLoanMoto');
 Route::get('/moto/service/{id}', 'MotoController@serviceMoto');
 Route::post('/moto/do-service', 'MotoController@doServiceMoto');
+Route::get('/log-or-reg', 'MotoController@logOrReg');
 
 Route::get('/wypo/list', 'WypoController@viewWypoList');
 Route::get('/wypo/list/{id}', 'WypoController@viewWypoListUser');

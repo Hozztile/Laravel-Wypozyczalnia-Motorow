@@ -8,7 +8,7 @@ class Moto extends Model
 {
     protected $table = 'moto';
 
-    protected $fillable = ['id_marka', 'model', 'pojemnosc', 'moc', 'waga', 'zdj', 'dostep'];
+    protected $fillable = ['id_marka', 'model', 'pojemnosc', 'moc', 'waga', 'zdj', 'dostep' , 'cena', 'przebieg', 'data_kons'];
 
     public function wypo()
 	{

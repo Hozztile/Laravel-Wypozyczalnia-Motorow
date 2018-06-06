@@ -12,6 +12,12 @@
             @endif
             @endguest
 
+            @if(Session::has('message'))
+    <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
+    @endif
+
+            
+
             <form method="post" action="{{ url('/moto/search') }}">
                 <select class="form-control" name="szukaj_marka">
                     <option value="" disabled selected>Marka</option>
@@ -19,11 +25,16 @@
                         <option value="{{ $markaa->id }}">{{ $markaa->nazwa }}</option>
                     @endforeach
                 </select>
-                <input type="text" class="form-control" placeholder="Model" name="szukaj_model" >
+                <input type="text" class="form-control" placeholder="Model.." name="szukaj_model" >
+                <!--<input type="number" class="form-control" placeholder="Pojemność od.." name="szukaj_poj" >
+                <input type="number" class="form-control" placeholder="Moc od.." name="szukaj_moc" >
+                <input type="number" class="form-control" placeholder="Waga od.." name="szukaj_waga" >-->
                 <input type="hidden" name="_token" value=" {{ csrf_token() }}"><br>
-                <div style=" width:50px; margin:0 auto; text-align: center; float: center;"><button type="submit" class="btn btn-primary" >Wyszukaj</button></div><br><br> 
+                <div style=" width:50px; margin:0 auto; text-align: center; float: center;"><button type="submit" class="btn btn-primary" >Wyszukajjjjjjjj</button></div><br><br> 
              </form>
             <br>
+
+
         </div>
     </div>
 
@@ -35,16 +46,9 @@
                     <thead>
 
                         <tr class="info">
-                            @guest
                             <th>Motocykle</th>
                             <th>Opis</th>
-                            @else
-                            <th>Motocykle</th>
-                            <th>Opis</th>
-                            @if(Auth::user()->auth == '3' OR Auth::user()->auth == '2' OR Auth::user()->auth == '1')
                             <th>Akcje</th>
-                            @endif
-                            @endguest
                             
                         </tr>
                     </thead>
@@ -58,20 +62,29 @@
                                 <p>Pojemnośc: {{$motor->pojemnosc}} cm3</p>
                                 <p>Moc: {{$motor->moc}} KM</p>
                                 <p>Waga: {{$motor->waga}} kg</p>
-                                        <p>Aktywne rezerwacje: <br>
-                                                @if( $motor->dostep == '1' )
+                                        <p>Sprawdź dostępność: <br>
+                                               <!-- @if( $motor->dostep == '1' )
                                                     @foreach ($motor->wypo as $cos)
                                                         {{ $cos->wypo_od }} - {{ $cos->wypo_do }} <br>
                                                     @endforeach
-                                                    
-                                                @endif
-                                                @if( $motor->dostep == '0' )
-                                                    {{ $motor->wypo()->count() }}
-                                                @endif
+                                                @endif-->
+
+                                            <form action="{{ url('/check') }}" method="post">
+                                                <input type="date" name="spr_data_od" placeholder="Od.." required> &nbsp&nbsp
+                                                <input type="date" name="spr_data_do" placeholder="Do.." required>
+                                                <input type="hidden" name="id_moto" value="{{ $motor->id }}">
+                                                <input type="hidden" name="_token" value=" {{ csrf_token() }}"><br><br>
+                                                <input type="submit" name="submit" class="btn btn-primary" value="Sprawdź">
+                                            </form>
+                                               
                                 </p>
+                                <p><b>Cena: {{ $motor->cena }} zł</b></p>
                                 
                             </td>
                             @guest
+                            <td style="width: 50px;">
+                            <a href="{{ url('/log-or-reg') }}" class="btn btn-primary"> Rezerwuj</a><br><br>
+                            </td>
                             @else
                             <td style="width: 50px;">
                             @if(Auth::user()->auth == '3' OR Auth::user()->auth == '2')

@@ -20,6 +20,9 @@ class CreateWypoTable extends Migration
             $table->date('wypo_od');
             $table->date('wypo_do');
             $table->integer('aktywne');
+            $table->integer('cena_c');
+            $table->string('lok_z');
+            $table->string('lok_do');
             $table->timestamps();
         });
     }

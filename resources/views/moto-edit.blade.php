@@ -25,11 +25,11 @@
 				<input type="number" name="moc_edit" value="{{ $moto->moc }}" required><br><br>
 				Waga
 				<input type="number" name="waga_edit" value="{{ $moto->waga }}" required><br><br>
-				Dostęp
-				<select type="text" name="dostep_edit" required>
-					<option value="1"> Dostępny</option>
-					<option value="0"> Niedostępny</option>
-				</select><br><br>
+				Cena
+				<input type="number" name="cena_edit" value="{{ $moto->cena }}" required><br><br>
+				Przebieg
+				<input type="number" name="przebieg_edit" value="{{ $moto->przebieg }}" required><br><br>
+				
 
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				<input type="hidden" name="id_moto" value="{{ $moto->id }}">

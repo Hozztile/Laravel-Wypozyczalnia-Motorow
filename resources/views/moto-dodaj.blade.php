@@ -23,6 +23,8 @@
 				Pojemość: <input type="number" name="pojemnosc" required><br><br>
 				Moc: <input type="number" name="moc" required><br><br>
 				Waga: <input type="number" name="waga" required><br><br>
+				Cena: <input type="number" name="cena" required><br><br>
+				Przebieg: <input type="number" name="przebieg" required><br><br>
 				Wybierz zdjęcie: <input type="file" name="file" id="file" required><br><br>
 
 			<a href="{{ url('/moto/list')}}" alt='zdjęcie' class="btn btn-primary">Wróć</a>

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Wypo;
 use App\Moto;
+use App\Marka;
+use App\Akcesoria;
+use App\Wypo_akcesoria;
 use Illuminate\Support\Facades\DB;
 
 class WypoController extends Controller
@@ -36,7 +39,7 @@ class WypoController extends Controller
     public function viewWypoListUser($id)
     {
 
-        $wypo = Wypo::where('id_user', $id)->get();
+        $wypo = Wypo::where('id_user', $id)->orderBy('id', 'DESC')->get();
         $moto = Moto::all();
 
         return view('wypo-list-user')
